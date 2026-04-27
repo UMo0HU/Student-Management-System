@@ -1,5 +1,10 @@
 from tkinter import *
 import colors as c
+from windows.Add import add_student_window
+from windows.View import view_students_window
+import database
+
+database.create_table()
 
 root = Tk()
 root.title("Student Management System")
@@ -19,10 +24,10 @@ title.place(x=70, y=30)
 card = Frame(root, bg=c.CARD, width=420, height=275, highlightbackground=c.BORDER, highlightthickness=1)
 card.place(x=40, y=100)
 
-btn1 = Button(card, text="Add Student", bg=c.PRIMARY, fg="white", font=("Arial", 12), width=15, bd=0)
+btn1 = Button(card, text="Add Student", bg=c.PRIMARY, fg="white", font=("Arial", 12), width=15, bd=0, command=add_student_window)
 btn1.place(x=30, y=30)
 
-btn2 = Button(card, text="View Students", bg=c.PRIMARY, fg="white", font=("Arial", 12), width=15, bd=0)
+btn2 = Button(card, text="View Students", bg=c.PRIMARY, fg="white", font=("Arial", 12), width=15, bd=0, command=view_students_window)
 btn2.place(x=220, y=30)
 
 btn3 = Button(card, text="Update Student", bg=c.PRIMARY, fg="white", font=("Arial", 12), width=15, bd=0)
