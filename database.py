@@ -17,3 +17,11 @@ def create_table():
     """)
     conn.commit()
     conn.close()
+
+def get_students():
+    conn = connect()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM students")
+    students = cursor.fetchall()
+    conn.close()
+    return students
