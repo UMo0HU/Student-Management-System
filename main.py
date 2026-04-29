@@ -4,6 +4,7 @@ from windows.Add import add_student_window
 from windows.View import view_students_window
 from windows.Delete import delete_student_window
 from windows.Update import update_student_window
+from windows.Search import search_students_window
 from windows.Statistics import stats_window
 import database
 
@@ -29,22 +30,21 @@ def open_window(window_func):
     if new_windows:
         win = new_windows[-1]
 
-        def go_back():
-            win.destroy()
-            root.deiconify()
+        win.protocol("WM_DELETE_WINDOW", win.destroy)
+        win.bind("<Destroy>", lambda e: root.deiconify() if str(e.widget) == str(win) else None)
 
-        win.protocol("WM_DELETE_WINDOW", go_back)
-
-        Button(
+        btn = Button(
             win,
             text="Back",
             bg=c.PRIMARY,
             fg="white",
             font=("Arial", 16, "bold"),
-            command=go_back,
+            command=win.destroy,
             bd=0,
             cursor="hand2"
-        ).place(x=10, y=10)
+        )
+        btn.place(x=4, y=15)
+        btn.lift()
 
 
 title = Label(
@@ -81,7 +81,8 @@ btn4 = Button(card, text="Delete Student", bg=c.DANGER, fg="white",
 btn4.place(x=220, y=110)
 
 btn5 = Button(card, text="Search Student", bg=c.PRIMARY, fg="white",
-              font=("Arial", 12), width=15, bd=0)
+              font=("Arial", 12), width=15, bd=0,
+              command=lambda: open_window(search_students_window))
 btn5.place(x=30, y=190)
 
 btn6 = Button(card, text="Statistics", bg=c.PRIMARY, fg="white",
