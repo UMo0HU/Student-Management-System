@@ -3,6 +3,7 @@ import colors as c
 from windows.Add import add_student_window
 from windows.View import view_students_window
 from windows.Delete import delete_student_window
+from windows.Update import update_student_window
 from windows.Statistics import stats_window
 import database
 
@@ -70,7 +71,8 @@ btn2 = Button(card, text="View Students", bg=c.PRIMARY, fg="white",
 btn2.place(x=220, y=30)
 
 btn3 = Button(card, text="Update Student", bg=c.PRIMARY, fg="white",
-              font=("Arial", 12), width=15, bd=0)
+              font=("Arial", 12), width=15, bd=0,
+              command=lambda: open_window(update_student_window))
 btn3.place(x=30, y=110)
 
 btn4 = Button(card, text="Delete Student", bg=c.DANGER, fg="white",
