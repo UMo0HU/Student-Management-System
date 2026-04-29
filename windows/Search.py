@@ -8,20 +8,18 @@ def get_db_connection():
     return sqlite3.connect(db_path)
 
 def search_students_window():
-    root = Tk()
+    root = Toplevel()
     root.title("Students Search")
     root.geometry("")
     root.configure(padx=15, pady=15)
 
-    # ================== Top Frame ==================
     top_frame = Frame(root)
-    top_frame.pack(fill="x", pady=10)
+    top_frame.pack(fill="x", pady=(45, 10))
 
     Label(top_frame, text="Search by:").pack(side=LEFT, padx=5)
 
     field_var = StringVar(value="name")
 
-    # ✅ Radio buttons replacing the Combobox
     for field in ["name", "id", "age", "department", "gpa"]:
         Radiobutton(
             top_frame,
@@ -38,7 +36,6 @@ def search_students_window():
     search_btn = Button(top_frame, text="Search")
     search_btn.pack(side=LEFT, padx=5)
 
-    # ================== Table ==================
     table_frame = Frame(root)
     table_frame.pack(fill="both", expand=True)
 
@@ -54,11 +51,9 @@ def search_students_window():
     tree.pack(side=LEFT, fill=BOTH, expand=True)
     scrollbar.pack(side=RIGHT, fill=Y)
 
-    # ================== Status ==================
     status_var = StringVar()
     Label(root, textvariable=status_var).pack(anchor="w", pady=5)
 
-    # ================== Logic ==================
     def load_data():
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -111,7 +106,9 @@ def search_students_window():
     keyword_entry.bind("<Return>", lambda e: search())
 
     load_data()
-    root.mainloop()
 
 if __name__ == "__main__":
+    root = Tk()
+    root.withdraw()
     search_students_window()
+    root.mainloop()
